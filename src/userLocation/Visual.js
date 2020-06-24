@@ -12,4 +12,4 @@ function Visual(props){
     )
 }
 
-export default Visual
+export default  Visual
