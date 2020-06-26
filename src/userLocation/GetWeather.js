@@ -49,8 +49,8 @@ class GetWeather extends React.Component {
         fetch(URLsity).then(res =>{
           if(res.status===200){
           return res.json();}else{
-            this.setState({woeid:JSON.parse(JSON.stringify(this.state.weatherData))[1].woeid})
-            return this.componentDidUpdate(prevProps);}
+            alert("У metaweather.com опять что-то пошло не так, попробуйте обновить страницу")
+            return res.json();}
         }).then(json => {
           this.setState({ woeidWeather: json });
           
