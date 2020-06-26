@@ -29,8 +29,17 @@ class Location extends React.Component {
 
     error() {
             alert('Невозможно определить ваше местоположение. Введите ваши координаты вручную.');
-            this.setState({latitude:prompt("Введите вашу текущую широту")});
-            this.setState({longitude:prompt("Введите вашу текущую долготу")});
+            let latitude=prompt("Введите вашу текущую широту");
+            let longitude=prompt("Введите вашу текущую долготу");
+
+            while(latitude>90||latitude<-90||!isFinite(latitude)){
+                latitude=(prompt("Широта в градусах должна быть числом от -90 до 90. Попробуйте еще раз:"));
+            }
+             this.setState({latitude:latitude});
+            while(latitude>90||latitude<-90||!isFinite(longitude)){
+                longitude=(prompt("Долгота в градусах должна быть числом от -90 до 90. Попробуйте еще раз:"));
+            }
+             this.setState({longitude:longitude});
           }   
 
     getStatus(){

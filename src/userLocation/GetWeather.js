@@ -24,9 +24,10 @@ class GetWeather extends React.Component {
     componentDidUpdate=(prevProps)=>{
             
       const URL="https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong="+this.props.latitude+","+this.props.longitude;
-        
+      
+      
       if(this.props.latitude!==prevProps.latitude||this.props.longitude!==prevProps.longitude){
-        fetch(URL).then(res => res.json()).then(json => {
+        fetch(URL).then(res => {return res.json();}).then(json => {
           this.setState({ weatherData: json });
           this.setState({ latitude: this.props.latitude });
         });
@@ -45,7 +46,12 @@ class GetWeather extends React.Component {
       if(this.state.latitude!==prevProps.latitude&&this.state.woeid!==0){
         
 
-        fetch(URLsity).then(res => res.json()).then(json => {
+        fetch(URLsity).then(res =>{
+          if(res.status===200){
+          return res.json();}else{
+            this.setState({woeid:JSON.parse(JSON.stringify(this.state.weatherData))[1].woeid})
+            return this.componentDidUpdate(prevProps);}
+        }).then(json => {
           this.setState({ woeidWeather: json });
           
         });
