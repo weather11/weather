@@ -9,12 +9,14 @@ class GetWeather extends React.Component {
           weatherData: [],
           latitude:null,
           longitude:null,
+          distance:"",
           woeid:0,
           woeidWeather:{},
           temp:"",
           weather_state:"",
           wind_speed:"",
-          air_pressure:""
+          air_pressure:"",
+          title:""
         };
        
     }
@@ -30,6 +32,7 @@ class GetWeather extends React.Component {
         fetch(URL).then(res => {return res.json();}).then(json => {
           this.setState({ weatherData: json });
           this.setState({ latitude: this.props.latitude });
+          this.setState({ longitude: this.props.longitude });
         });
       }
 
@@ -61,14 +64,15 @@ class GetWeather extends React.Component {
         
       }
       const woeidWeather=this.state.woeidWeather;
+      const weatherData=this.state.weatherData;
       if(Object.keys(woeidWeather).length>0){
-        console.log(woeidWeather.consolidated_weather[0]);
-        
         if(this.state.temp!==woeidWeather.consolidated_weather[0].the_temp){
-        this.setState({temp:woeidWeather.consolidated_weather[0].the_temp})
-        this.setState({weather_state:woeidWeather.consolidated_weather[0].weather_state_abbr})
-        this.setState({wind_speed:woeidWeather.consolidated_weather[0].wind_speed})
-        this.setState({air_pressure:woeidWeather.consolidated_weather[0].air_pressure})
+          this.setState({temp:woeidWeather.consolidated_weather[0].the_temp})
+          this.setState({weather_state:woeidWeather.consolidated_weather[0].weather_state_abbr})
+          this.setState({wind_speed:woeidWeather.consolidated_weather[0].wind_speed})
+          this.setState({air_pressure:woeidWeather.consolidated_weather[0].air_pressure})
+          this.setState({title:woeidWeather.title})
+          this.setState({distance:weatherData[0].distance})
         }
       } 
     }
@@ -84,7 +88,7 @@ class GetWeather extends React.Component {
 
     return (<div>
               
-              <Visual temp={this.state.temp} weather_state={this.state.weather_state} wind_speed={this.state.wind_speed} air_pressure={this.state.air_pressure}/>
+              <Visual temp={this.state.temp} weather_state={this.state.weather_state} wind_speed={this.state.wind_speed} air_pressure={this.state.air_pressure} title={this.state.title} distance={this.state.distance}/>
             </div>
       
       )
