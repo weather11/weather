@@ -4,7 +4,7 @@ import snow from "../img/snow.gif";
 import sun from "../img/sun.gif";
 import thunder from "../img/thunder.gif";
 import clouds from "../img/clouds.gif"
-
+    //Тут просто функциональный компонент верстки. Весь css в App.css. Верстка резиновая на гридах. Никаких "красивостей" не делал (кроме гифки, зависящей от статуса погоды), но если надо - не проблема.
 function Visual(props){
     let weather_img;
     
@@ -28,7 +28,6 @@ function Visual(props){
         <div className="wind_speed">Скорость ветра: {(+props.wind_speed).toFixed(1)} м/с</div>
         <div className="pressure">Атмосферное давление: {(props.air_pressure* 0.750064).toFixed(0)} мм.рт.ст</div>
         <div className="nearest_station">Ближайшая поддерживаемая метеостанция: {props.title} ({(props.distance/1000).toFixed(1)} км от вас)</div>
-        
     </div>
    
     )
